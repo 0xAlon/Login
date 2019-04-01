@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tool="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Welcome Back" />
+
+    <TextView
+        android:id="@+id/tvUser"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="Ragnar Lothbrok"
+        android:textColor="#77b4ca"/>
+
+    <TextView
+        android:id="@+id/tvSingOut"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="sing out"
+        android:clickable="true"
+        android:background="?attr/selectableItemBackground"/>
+
+</LinearLayout>
