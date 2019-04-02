@@ -1,5 +1,6 @@
 package com.alondev.login;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,11 +13,13 @@ import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 
+@SuppressLint("ValidFragment")
 public class PasswordResetFragment extends Fragment {
 
     @BindView(R.id.tvEmail)
@@ -25,10 +28,13 @@ public class PasswordResetFragment extends Fragment {
     private static final String TAG = "PasswordResetFragment";
     private Unbinder unbinder;
     private FirebaseAuth mAuth;
+    private FragmentManager fragmentManager;
 
-    public PasswordResetFragment() {
+    @SuppressLint("ValidFragment")
+    public PasswordResetFragment(FragmentManager fragmentManager) {
         FirebaseApp.initializeApp(getContext());
         mAuth = FirebaseAuth.getInstance();
+        this.fragmentManager = fragmentManager;
     }
 
     @Override
@@ -53,7 +59,10 @@ public class PasswordResetFragment extends Fragment {
                         if (task.isSuccessful()) {
                             Log.d(TAG, "Email sent.");
                             Toast.makeText(getContext(), "Email sent.", Toast.LENGTH_SHORT).show();
-                            getFragmentManager().popBackStack();
+                            fragmentManager.popBackStack();
+                        } else {
+                            Toast.makeText(getContext(), "Email not sent.", Toast.LENGTH_SHORT).show();
+
                         }
                     });
         }

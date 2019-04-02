@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import butterknife.BindView;
@@ -39,7 +40,7 @@ public class LoginFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_login, container, false);
         unbinder = ButterKnife.bind(this, view);
@@ -63,14 +64,14 @@ public class LoginFragment extends Fragment {
                         } else {
                             Toast.makeText(getContext(), "signIn Fail", Toast.LENGTH_SHORT).show();
                         }
-                    }).addOnFailureListener(e -> e.printStackTrace());
+                    }).addOnFailureListener(Throwable::printStackTrace);
         }
     }
 
     @OnClick(R.id.tvForgotPassword)
     void ForgotPassword() {
         fragmentManager.beginTransaction()
-                .replace(R.id.login_main_container, new PasswordResetFragment())
+                .replace(R.id.login_main_container, new PasswordResetFragment(fragmentManager))
                 .addToBackStack("PasswordResetFragment")
                 .commit();
     }

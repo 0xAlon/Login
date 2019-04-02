@@ -3,45 +3,81 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/gradient"
     android:orientation="vertical"
-    android:padding="18dp"
+    android:paddingLeft="34dp"
+    android:paddingRight="34dp"
     tools:context=".MainActivity">
 
-    <EditText
-        android:id="@+id/tvUser"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/open_sans"
-        android:hint="ragnar_lothbrok"
-        android:inputType="text" />
+    <ImageView style="@style/logo" />
 
-    <EditText
-        android:id="@+id/tvEmail"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/open_sans"
-        android:hint="ragnar_lothbrok@vikings.com"
-        android:inputType="textEmailAddress" />
+    <TextView
+        style="@style/main_text"
+        android:text="Create Account" />
 
-    <EditText
-        android:id="@+id/tvPassword"
+    <TextView
+        style="@style/secondary_text"
+        android:text="Register to continue" />
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/open_sans"
-        android:hint="***********"
-        android:inputType="textPassword" />
+        android:layout_height="55dp"
+        android:layout_marginTop="54dp"
+        android:background="@drawable/rounded_field">
+
+        <EditText
+            android:id="@+id/tvUser"
+            style="@style/text_box"
+            android:hint="ragnar_lothbrok"
+            android:inputType="text" />
+
+        <TextView
+            style="@style/hint_text"
+            android:text="USERNAME" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_marginTop="17dp"
+        android:background="@drawable/rounded_field">
+
+        <EditText
+            android:id="@+id/tvEmail"
+            style="@style/text_box"
+            android:hint="ragnar_lothbrok@vikings.com"
+            android:inputType="textEmailAddress" />
+
+        <TextView
+            style="@style/hint_text"
+            android:text="EMAIL" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_marginTop="17dp"
+        android:background="@drawable/rounded_field">
+
+        <EditText
+            android:id="@+id/tvPassword"
+            style="@style/text_box"
+            android:hint="***********"
+            android:inputType="textPassword" />
+
+        <TextView
+            style="@style/hint_text"
+            android:text="PASSWORD" />
+
+    </RelativeLayout>
+
 
     <Button
         android:id="@+id/btnProceed"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/open_sans_bold"
-        android:text="Proceed"
-        android:textColor="#1d3649" />
+        style="@style/proceed_button"
+        android:text="Proceed" />
 
-    <androidx.core.widget.ContentLoadingProgressBar
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        />
 
 </LinearLayout>
