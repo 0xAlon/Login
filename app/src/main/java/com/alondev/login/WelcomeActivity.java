@@ -12,6 +12,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import androidx.appcompat.app.AppCompatActivity;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -34,13 +35,13 @@ public class WelcomeActivity extends AppCompatActivity {
         FirebaseUser currentUser = mAuth.getCurrentUser();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-        db.collection("Users").whereEqualTo("Uid",currentUser.getUid())
+        db.collection("Users").whereEqualTo("Uid", currentUser.getUid())
                 .get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         for (QueryDocumentSnapshot document : task.getResult()) {
                             Log.d(TAG, document.getId() + " => " + document.getData().get("Uid"));
-                            if (String.valueOf(currentUser.getUid()).equals(String.valueOf(document.getData().get("Uid")))) {
+                            if (currentUser.getUid().equals(String.valueOf(document.getData().get("Uid")))) {
                                 tvUser.setText(String.valueOf(document.getData().get("Username")));
                             }
                         }

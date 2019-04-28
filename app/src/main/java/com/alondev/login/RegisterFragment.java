@@ -2,6 +2,7 @@ package com.alondev.login;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,8 +17,10 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 import androidx.fragment.app.Fragment;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -57,7 +60,7 @@ public class RegisterFragment extends Fragment {
 
     @OnClick(R.id.btnProceed)
     void Proceed() {
-        if (!tvEmail.getText().toString().equals("") && !tvPassword.getText().toString().equals("") && !tvUser.getText().toString().equals("")) {
+        if (isValidPassword(tvPassword.getText().toString()) && !tvEmail.getText().toString().equals("") && !tvUser.getText().toString().equals("")) {
             mAuth.createUserWithEmailAndPassword(tvEmail.getText().toString(), tvPassword.getText().toString())
                     .addOnCompleteListener(getActivity(), task -> {
                         if (task.isSuccessful()) {
@@ -77,10 +80,17 @@ public class RegisterFragment extends Fragment {
                                         startActivity(intent);
                                     })
                                     .addOnFailureListener(e -> Log.w(TAG, "Error adding document", e));
-                        } else {
-                            Toast.makeText(getContext(), "Authentication failed.", Toast.LENGTH_SHORT).show();
                         }
                     }).addOnFailureListener(Throwable::printStackTrace);
+        } else {
+            Toast.makeText(getContext(), "Authentication failed. (Password must contain minimum 8 characters at least 1 Alphabet, 1 Number)", Toast.LENGTH_LONG).show();
         }
     }
+
+    //Password must contain minimum 8 characters at least 1 Alphabet, 1 Number
+    private static boolean isValidPassword(String s) {
+        Pattern pattern = Pattern.compile("[a-zA-Z0-9]{8,24}");
+        return !TextUtils.isEmpty(s) && pattern.matcher(s).matches();
+    }
 }
+
